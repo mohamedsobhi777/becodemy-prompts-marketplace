@@ -1,14 +1,21 @@
 'use client';
 
-import About from "@/components/About";
-// Components
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import PromptCard from "@/components/PromptCard";
-import { styles } from "@/utils/styles";
 import Image from "next/image";
+import { styles } from "@/utils/styles";
+import { Divider } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
+
+// Components
+import Hero from "@/components/Route/Hero";
+import About from "@/components/Route/About";
+import Future from "@/components/Route/Future";
+import Footer from "@/components/Layout/Footer";
+import Header from "@/components/Layout/Header";
+import Partners from "@/components/Route/Partners";
+import BestSellers from "@/components/Shop/BestSellers";
+import PromptCard from "@/components/Prompts/PromptCard";
+import SellersBanner from "@/components/Shop/SellersBanner";
 
 
 
@@ -44,7 +51,24 @@ const Page = (props: Props) => {
           </h1>
           <div className="flex flex-wrap">
             <PromptCard />
+            <PromptCard />
+            <PromptCard />
+            <PromptCard />
+
+            <PromptCard />
+            <PromptCard />
+            <PromptCard />
+            <PromptCard />
           </div>
+          <br />
+          <BestSellers />
+          <Future />
+          <Partners />
+          <SellersBanner />
+          <br />
+          <br />
+          <Divider className="bg-[#ffffff23]" />
+          <Footer />
         </div>
       </div>
     </div>
