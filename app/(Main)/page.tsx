@@ -4,7 +4,7 @@ import Image from "next/image";
 import { styles } from "@/utils/styles";
 import { Divider } from "@nextui-org/react";
 import { useEffect, useState } from "react";
-
+import axios from 'axios';
 
 // Components
 import Hero from "@/components/Route/Hero";
@@ -16,23 +16,44 @@ import Partners from "@/components/Route/Partners";
 import BestSellers from "@/components/Shop/BestSellers";
 import PromptCard from "@/components/Prompts/PromptCard";
 import SellersBanner from "@/components/Shop/SellersBanner";
+import Loader from "@/utils/Loader";
 
 
 
 type Props = {}
 
 const Page = (props: Props) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     if (!isMounted) {
       setIsMounted(true)
     }
   }, [isMounted])
+
+  useEffect(() => {
+    setLoading(true)
+    axios.get("/api/me").then((res) => {
+      console.log(res.data.user)
+      setUser(res.data.user);
+      setLoading(false);
+    }).catch((error) => {
+      console.log(error)
+      setLoading(false);
+    })
+  }, [])
+
   if (!isMounted) return null;
+
+  if (loading) {
+    return <Loader />
+  }
+
   return (
     <div>
       <div className="banner">
-        <Header activeItem={0} />
+        <Header activeItem={0} user={user} />
         <Hero />
       </div>
       <Image
