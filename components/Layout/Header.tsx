@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navigation from './Navigation'
 
 // Icons
@@ -14,13 +14,13 @@ import { RxCross1 } from 'react-icons/rx';
 type Props = {
     activeItem: number;
     user: User | null;
+    isSellerExist: boolean;
 }
 
-const Header = ({ activeItem, user }: Props) => {
+const Header = ({ activeItem, user, isSellerExist }: Props) => {
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState(false)
     const [activeProfile, setActiveProfile] = useState(false)
-    const [isSellerExist, setIsSellerExist] = useState(false)
 
     if (typeof window !== 'undefined') {
         window.addEventListener('scroll', () => {
@@ -38,6 +38,7 @@ const Header = ({ activeItem, user }: Props) => {
             setOpen(prev => !prev);
         }
     }
+
 
     const handleProfile = () => {
         setActiveProfile(prev => !prev);
